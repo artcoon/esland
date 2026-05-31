@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { MapView } from "../components/Map";
 import { 
   SERVICES, 
   CASE_STUDIES, 
   INSIGHTS, 
   CEO_MESSAGE, 
   COMPANY_INFO, 
-  HISTORY 
+  HISTORY,
+  BEFORE_AFTER_DATA
 } from "../const";
 import { 
   ArrowRight, 
@@ -15,22 +17,17 @@ import {
   ShieldCheck, 
   Award, 
   Sparkles,
-  Layers,
   Trees,
-  ChevronRight,
   Heart,
-  CalendarRange,
   Leaf,
-  FileText,
   User,
   MapPin,
-  Building2,
-  TrendingUp,
-  Download,
-  DollarSign,
-  AlertTriangle,
+  Phone,
+  Printer,
+  Mail,
   Flame,
-  Car
+  Car,
+  Download
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,11 +41,89 @@ export default function Home() {
 
   // Carbon Calculator State
   const [areaInput, setAreaInput] = useState<string>("1000");
+
+  // Before/After Slider State
+  const [sliderPosition, setSliderPosition] = useState<number>(50);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const handleSliderMove = (clientX: number) => {
+    if (!sliderRef.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    handleSliderMove(e.clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches[0]) {
+      handleSliderMove(e.touches[0].clientX);
+    }
+  };
+
+  // Google Maps GIS Tracker
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
+
+  const handleMapReady = (map: google.maps.Map) => {
+    mapRef.current = map;
+    
+    // Clear old markers if any
+    markersRef.current.forEach(m => m.map = null);
+    markersRef.current = [];
+
+    // Add Markers for each case study
+    CASE_STUDIES.forEach((study) => {
+      if (!study.lat || !study.lng) return;
+
+      const pinElement = document.createElement("div");
+      pinElement.className = "flex items-center justify-center h-8 w-8 rounded-full bg-primary border-2 border-background shadow-lg text-primary-foreground font-serif text-[10px] font-bold cursor-pointer hover:scale-110 transition-transform";
+      pinElement.innerText = "ES";
+
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+        map,
+        position: { lat: study.lat, lng: study.lng },
+        title: study.title,
+        content: pinElement
+      });
+
+      // Info Window for Marker Click
+      const infoContent = `
+        <div style="padding: 10px; max-width: 250px; text-align: left; font-family: sans-serif;">
+          <span style="font-size: 9px; font-weight: bold; color: #1F7A3A; text-transform: uppercase; letter-spacing: 1px;">${study.client}</span>
+          <h4 style="margin: 4px 0 6px; font-size: 13px; font-weight: bold; color: #173B57;">${study.title}</h4>
+          <p style="margin: 0 0 8px; font-size: 11px; color: #6B6B5F; line-height: 1.4;">${study.description}</p>
+          <div style="font-size: 10px; font-weight: bold; color: #1F7A3A;">실적 규모: ${study.budget}</div>
+        </div>
+      `;
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: infoContent
+      });
+
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+      });
+
+      markersRef.current.push(marker);
+    });
+
+    // Center map to show all pins
+    if (CASE_STUDIES.length > 0) {
+      const bounds = new google.maps.LatLngBounds();
+      CASE_STUDIES.forEach(study => {
+        if (study.lat && study.lng) {
+          bounds.extend({ lat: study.lat, lng: study.lng });
+        }
+      });
+      map.fitBounds(bounds);
+    }
+  };
   
   // Real-time calculation helper based on PDF parameters:
-  // - 1 m2 of biochar slope application sequesters ~ 2.0 kg of CO2 permanently in the soil.
-  // - A typical mature pine tree absorbs ~ 6.6 kg of CO2 per year.
-  // - An average passenger car emits ~ 0.12 kg of CO2 per km driven.
   const calculateMetrics = () => {
     const area = parseFloat(areaInput) || 0;
     const co2SequestrationKg = area * 2.0;
@@ -419,7 +494,7 @@ export default function Home() {
                   </div>
 
                   <div className="p-3.5 rounded-xl border border-border/80 bg-[#F5F6F0]/50 text-[11px] text-[#6B6B5F] leading-relaxed font-semibold flex gap-2.5 items-start">
-                    <Leaf className="h-4 w-4 text-primary shrink-0 mt-0.5 animate-pulse" />
+                    <Leaf className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>
                       <strong>산출 공식 근거:</strong> 당사의 특허 공법에 혼합되는 탄소 저장형 식생기반재는 ㎡당 약 2.0kg의 순수 탄소(CO₂)를 대기 중에서 회수하여 토양 속에 반영구적으로 가둡니다.
                     </span>
@@ -657,6 +732,77 @@ export default function Home() {
               <p className="text-muted-foreground text-sm leading-relaxed font-medium">
                 (주)이에스조경은 지자체 공공 조달부터 민간 대기업 하도급까지 총 25건의 다양한 현장을 무사고로 준공했습니다. 정량화된 지표로 증명된 품질을 확인해 보세요.
               </p>
+            </div>
+
+            {/* INTERACTIVE BEFORE/AFTER DRAG SLIDER */}
+            <div className="max-w-4xl mx-auto mb-20 flex flex-col gap-6 text-left">
+              <div className="flex flex-col gap-2">
+                <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Before & After Slider</span>
+                <h3 className="font-serif text-xl font-bold text-[#173B57]">{BEFORE_AFTER_DATA.title}</h3>
+                <p className="text-xs text-muted-foreground font-medium leading-relaxed">{BEFORE_AFTER_DATA.description}</p>
+              </div>
+
+              <div 
+                ref={sliderRef}
+                onMouseMove={handleMouseMove}
+                onTouchMove={handleTouchMove}
+                className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-border shadow-xl select-none cursor-ew-resize"
+              >
+                {/* Before Image (Bottom Layer) */}
+                <img 
+                  src={BEFORE_AFTER_DATA.beforeImage} 
+                  alt="시공 전 비탈면" 
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                />
+                <div className="absolute bottom-4 left-4 px-3 py-1 rounded bg-black/70 text-white text-[10px] font-bold uppercase tracking-wider">
+                  {BEFORE_AFTER_DATA.beforeLabel}
+                </div>
+
+                {/* After Image (Top Layer, Clipped) */}
+                <div 
+                  className="absolute inset-0 overflow-hidden pointer-events-none"
+                  style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
+                >
+                  <img 
+                    src={BEFORE_AFTER_DATA.afterImage} 
+                    alt="시공 후 비탈면" 
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    style={{ width: sliderRef.current?.getBoundingClientRect().width }}
+                  />
+                  <div className="absolute bottom-4 left-4 px-3 py-1 rounded bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider">
+                    {BEFORE_AFTER_DATA.afterLabel}
+                  </div>
+                </div>
+
+                {/* Handle Line */}
+                <div 
+                  className="absolute top-0 bottom-0 w-1 bg-white shadow-lg flex items-center justify-center pointer-events-none"
+                  style={{ left: `${sliderPosition}%` }}
+                >
+                  <div className="h-10 w-10 rounded-full bg-white text-primary border border-primary/20 shadow-xl flex items-center justify-center font-bold text-sm">
+                    ↔
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* GOOGLE MAPS GIS TRACKER */}
+            <div className="max-w-4xl mx-auto mb-20 flex flex-col gap-6 text-left">
+              <div className="flex flex-col gap-2">
+                <span className="text-[10px] font-bold text-primary uppercase tracking-wider">GIS Project Tracker</span>
+                <h3 className="font-serif text-xl font-bold text-[#173B57]">(주)이에스조경 전국 준공 현장 지도</h3>
+                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                  경기 광주시를 포함하여 당사가 정직하고 안전하게 준공을 완료한 전국 주요 시공 현장의 실적 분포입니다. 마커를 클릭하시면 현장명과 상세 실적 규모를 확인하실 수 있습니다.
+                </p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
+                <MapView 
+                  initialCenter={{ lat: 37.4251, lng: 127.2893 }}
+                  initialZoom={11}
+                  onMapReady={handleMapReady}
+                  className="h-[400px] w-full"
+                />
+              </div>
             </div>
 
             {/* Filter Controls */}
