@@ -30,7 +30,7 @@ export default function Footer() {
                 <span className="font-serif text-sm font-bold text-primary">ES</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-sm font-bold text-[#173B57] tracking-wider leading-none">{COMPANY_INFO.brandTitle}</span>
+                <span className="font-serif text-sm font-bold text-[#173B57] tracking-wider leading-none">ES GREENWORKS</span>
                 <span className="text-[10px] text-primary font-bold tracking-widest mt-1 leading-none">{COMPANY_INFO.name}</span>
               </div>
             </div>
@@ -99,10 +99,10 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="flex flex-col gap-1 sm:items-start">
             <p className="font-medium text-center sm:text-left">
-              {COMPANY_INFO.name} | 대표이사 {COMPANY_INFO.ceo} | 사업자등록번호: 592-87-01625 | 법인등록번호: 205411-0033219
+              {COMPANY_INFO.name} | 대표이사 {COMPANY_INFO.ceo} | 사업자등록번호: {COMPANY_INFO.registrationNo} | 법인등록번호: 205411-0033219
             </p>
             <p className="text-center sm:text-left">
-              {COMPANY_INFO.license} | {COMPANY_INFO.evaluation2025}
+              면허번호: {COMPANY_INFO.licenseNo} | 자본금: {COMPANY_INFO.capital}
             </p>
           </div>
           <div className="text-center sm:text-right font-medium">

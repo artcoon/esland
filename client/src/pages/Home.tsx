@@ -411,7 +411,8 @@ export default function Home() {
                   <div key={idx} className="relative text-left flex flex-col gap-1 group">
                     <div className="absolute -left-[37px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-background transition-transform duration-300 group-hover:scale-125" />
                     <span className="font-serif text-sm font-bold text-primary">{item.year}</span>
-                    <p className="text-sm text-foreground font-bold leading-relaxed">{item.event}</p>
+                    <h4 className="text-sm text-foreground font-bold leading-relaxed">{item.title}</h4>
+                    <p className="text-xs text-[#6B6B5F] leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -562,7 +563,7 @@ export default function Home() {
 
             {/* Interactive Tabs */}
             <div className="flex flex-wrap justify-center gap-2 mb-12">
-              {SERVICES.map((service) => (
+              {SERVICES.map((service: any) => (
                 <button
                   key={service.id}
                   onClick={() => setActiveTab(service.id)}
@@ -578,7 +579,7 @@ export default function Home() {
             </div>
 
             {/* Active Tab Content */}
-            {SERVICES.map((service) => {
+            {SERVICES.map((service: any) => {
               if (service.id !== activeTab) return null;
               return (
                 <div 
@@ -602,7 +603,7 @@ export default function Home() {
                     <div className="flex flex-col gap-3">
                       <span className="text-xs font-bold text-foreground uppercase tracking-widest">주요 엔지니어링 구성</span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {service.features.map((feat, idx) => (
+                        {service.features.map((feat: string, idx: number) => (
                           <div key={idx} className="flex items-start gap-2.5 text-xs text-muted-foreground font-semibold">
                             <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                             <span>{feat}</span>
