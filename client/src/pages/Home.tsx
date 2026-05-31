@@ -28,7 +28,9 @@ import {
   TrendingUp,
   Download,
   DollarSign,
-  AlertTriangle
+  AlertTriangle,
+  Flame,
+  Car
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,6 +41,30 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<string>("slope");
   const [portfolioFilter, setPortfolioFilter] = useState<string>("all");
   const [selectedCase, setSelectedCase] = useState<typeof CASE_STUDIES[0] | null>(null);
+
+  // Carbon Calculator State
+  const [areaInput, setAreaInput] = useState<string>("1000");
+  
+  // Real-time calculation helper based on PDF parameters:
+  // - 1 m2 of biochar slope application sequesters ~ 2.0 kg of CO2 permanently in the soil.
+  // - A typical mature pine tree absorbs ~ 6.6 kg of CO2 per year.
+  // - An average passenger car emits ~ 0.12 kg of CO2 per km driven.
+  const calculateMetrics = () => {
+    const area = parseFloat(areaInput) || 0;
+    const co2SequestrationKg = area * 2.0;
+    const co2SequestrationTons = co2SequestrationKg / 1000;
+    const treeEquivalent = co2SequestrationKg / 6.6;
+    const carDistanceReductionKm = co2SequestrationKg / 0.12;
+
+    return {
+      co2Kg: co2SequestrationKg.toLocaleString(undefined, { maximumFractionDigits: 1 }),
+      co2Tons: co2SequestrationTons.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+      trees: Math.round(treeEquivalent).toLocaleString(),
+      carKm: Math.round(carDistanceReductionKm).toLocaleString()
+    };
+  };
+
+  const metrics = calculateMetrics();
 
   // Lead Qualification Form State
   const [step, setStep] = useState(1);
@@ -318,7 +344,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SECTION 3: ESG & Sustainability Spotlight */}
+        {/* SECTION 3: ESG & Sustainability Spotlight with Carbon Calculator */}
         <section className="py-24 bg-card/30 border-y border-border/80 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-primary/5 blur-[100px]" />
           
@@ -333,7 +359,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
               {esgPoints.map((point, idx) => (
                 <div key={idx} className="luxury-card flex flex-col gap-4 text-left border-primary/10 hover:border-primary/30 bg-background/80 shadow-sm">
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/5">
@@ -347,6 +373,101 @@ export default function Home() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* INTERACTIVE CARBON CALCULATOR */}
+            <div className="max-w-4xl mx-auto rounded-2xl border border-primary/20 bg-background p-8 shadow-xl text-left">
+              <div className="flex flex-col lg:flex-row gap-8 items-center">
+                {/* Calculator Input Side */}
+                <div className="w-full lg:w-1/2 flex flex-col gap-5">
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-wider">Carbon Reduction Simulator</span>
+                    <h3 className="font-serif text-xl font-bold text-[#173B57]">친환경 바이오차 탄소 저감 계산기</h3>
+                    <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                      시공 예정인 비탈면 또는 조경 면적(㎡)을 입력해 보세요. (주)이에스조경의 특허받은 탄소 저장형 바이오차 공법을 적용했을 때 영구적으로 격리되는 이산화탄소 감축량을 정량적으로 산출해 드립니다.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs font-bold text-foreground">시공 예정 면적 (㎡)</label>
+                      <span className="text-xs font-serif font-bold text-primary">{(parseFloat(areaInput) || 0).toLocaleString()} ㎡</span>
+                    </div>
+                    
+                    <div className="flex gap-4 items-center">
+                      <input 
+                        type="range" 
+                        min="100" 
+                        max="10000" 
+                        step="100"
+                        value={areaInput}
+                        onChange={(e) => setAreaInput(e.target.value)}
+                        className="flex-grow h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+                      />
+                      <Input 
+                        type="number" 
+                        value={areaInput} 
+                        onChange={(e) => setAreaInput(e.target.value)}
+                        className="w-24 text-right text-xs font-bold font-serif h-9"
+                        placeholder="1000"
+                      />
+                    </div>
+                    <div className="flex justify-between text-[10px] text-muted-foreground font-bold">
+                      <span>최소 100 ㎡</span>
+                      <span>최대 10,000 ㎡</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl border border-border/80 bg-[#F5F6F0]/50 text-[11px] text-[#6B6B5F] leading-relaxed font-semibold flex gap-2.5 items-start">
+                    <Leaf className="h-4 w-4 text-primary shrink-0 mt-0.5 animate-pulse" />
+                    <span>
+                      <strong>산출 공식 근거:</strong> 당사의 특허 공법에 혼합되는 탄소 저장형 식생기반재는 ㎡당 약 2.0kg의 순수 탄소(CO₂)를 대기 중에서 회수하여 토양 속에 반영구적으로 가둡니다.
+                    </span>
+                  </div>
+                </div>
+
+                {/* Calculator Results Side */}
+                <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+                  {/* Result 1: CO2 */}
+                  <div className="p-4 rounded-xl border border-primary/20 bg-primary/5 flex items-center gap-4 text-left">
+                    <div className="h-10 w-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shrink-0">
+                      <Flame className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">이산화탄소(CO₂) 영구 격리량</span>
+                      <span className="font-serif text-lg sm:text-xl font-bold text-primary mt-0.5">
+                        {metrics.co2Kg} kg <span className="text-xs text-muted-foreground">({metrics.co2Tons} 톤)</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Result 2: Trees */}
+                  <div className="p-4 rounded-xl border border-border bg-background flex items-center gap-4 text-left">
+                    <div className="h-10 w-10 rounded-lg bg-secondary text-secondary-foreground flex items-center justify-center shrink-0">
+                      <Trees className="h-5 w-5 text-secondary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">연간 소나무 식재 대체 효과</span>
+                      <span className="font-serif text-lg sm:text-xl font-bold text-foreground mt-0.5">
+                        {metrics.trees} 그루 <span className="text-xs text-muted-foreground">식재 효과</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Result 3: Car */}
+                  <div className="p-4 rounded-xl border border-border bg-background flex items-center gap-4 text-left">
+                    <div className="h-10 w-10 rounded-lg bg-muted-foreground/10 text-foreground flex items-center justify-center shrink-0">
+                      <Car className="h-5 w-5 text-[#6B6B5F]" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">승용차 주행거리 감축 효과</span>
+                      <span className="font-serif text-lg sm:text-xl font-bold text-foreground mt-0.5">
+                        {metrics.carKm} km <span className="text-xs text-muted-foreground">주행 상쇄</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
