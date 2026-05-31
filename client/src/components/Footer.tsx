@@ -1,5 +1,5 @@
 /*
- * Design Philosophy: Liquid Carbon & Gold
+ * Design Philosophy: Forest Emerald & Champagne Gold
  * Component: Premium Footer
  */
 
@@ -11,7 +11,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-20 border-t border-border/40 bg-card/40 py-16 backdrop-blur-md overflow-hidden">
+    <footer className="relative mt-20 border-t border-border/40 bg-card/40 py-16 backdrop-blur-md overflow-hidden text-left">
       {/* Background Glows */}
       <div className="absolute bottom-0 left-1/4 -z-10 h-64 w-64 rounded-full bg-primary/5 blur-[120px]" />
       <div className="absolute top-0 right-1/4 -z-10 h-64 w-64 rounded-full bg-secondary/5 blur-[120px]" />
@@ -28,7 +28,7 @@ export default function Footer() {
                 <span className="font-serif text-lg font-bold tracking-wider text-gradient-gold">
                   STRATIFY
                 </span>
-                <span className="text-[9px] tracking-[0.25em] text-muted-foreground font-medium uppercase">
+                <span className="text-[9px] tracking-[0.25em] text-emerald-400 font-semibold uppercase">
                   Consulting & Landscape
                 </span>
               </div>
@@ -38,10 +38,10 @@ export default function Footer() {
               특허 출원 중인 독자적인 다층복합보강구조 공법과 ESG 탄소흡수 정원 기술로 
               다음 세대를 위한 최상의 환경을 설계합니다.
             </p>
-            <div className="flex gap-4 text-xs text-amber-400 font-medium">
+            <div className="flex flex-wrap gap-4 text-xs text-emerald-400 font-medium">
               <span className="flex items-center gap-1.5 border-r border-border/60 pr-4">여성기업 인증</span>
               <span className="flex items-center gap-1.5 border-r border-border/60 pr-4">특허 공법 보유</span>
-              <span>ESG 친환경 경영</span>
+              <span className="text-amber-400">ESG 친환경 경영</span>
             </div>
           </div>
 
@@ -52,22 +52,22 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
               <li>
-                <Link href="/services" className="hover:text-amber-400 flex items-center gap-1 group">
+                <Link href="/services" className="hover:text-emerald-400 flex items-center gap-1 group">
                   친환경 사면복원·녹화 <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-amber-400 flex items-center gap-1 group">
+                <Link href="/services" className="hover:text-emerald-400 flex items-center gap-1 group">
                   공공·산업단지 조경공사 <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-amber-400 flex items-center gap-1 group">
+                <Link href="/services" className="hover:text-emerald-400 flex items-center gap-1 group">
                   연간 조경 유지관리 계약 <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-amber-400 flex items-center gap-1 group">
+                <Link href="/services" className="hover:text-emerald-400 flex items-center gap-1 group">
                   실내 플랜테리어 & 스마트 케어 <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
@@ -81,19 +81,19 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
               <li className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-amber-400 mt-0.5 shrink-0" />
+                <MapPin className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" />
                 <span>{COMPANY_INFO.address}</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-amber-400 shrink-0" />
+                <Phone className="h-4 w-4 text-emerald-400 shrink-0" />
                 <span>대표전화: {COMPANY_INFO.phone}</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Printer className="h-4 w-4 text-amber-400 shrink-0" />
+                <Printer className="h-4 w-4 text-emerald-400 shrink-0" />
                 <span>팩스: {COMPANY_INFO.fax}</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-amber-400 shrink-0" />
+                <Mail className="h-4 w-4 text-emerald-400 shrink-0" />
                 <span>이메일: {COMPANY_INFO.email}</span>
               </li>
             </ul>
@@ -111,7 +111,7 @@ export default function Footer() {
           </div>
           <div className="text-center sm:text-right">
             <p>© {currentYear} {COMPANY_INFO.brandName}. All rights reserved.</p>
-            <p className="text-[10px] text-muted-foreground/60 mt-0.5">From the Roots to the Future.</p>
+            <p className="text-[10px] text-emerald-400/60 mt-0.5">From the Roots to the Future.</p>
           </div>
         </div>
       </div>

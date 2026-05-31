@@ -1,401 +1,344 @@
 /*
- * Design Philosophy: Liquid Carbon & Gold
- * Page: Home Page (Main Landing)
+ * Design Philosophy: Forest Emerald & Champagne Gold
+ * Page: Main Landing (Home)
  */
 
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  ArrowRight, 
-  ShieldCheck, 
-  Award, 
-  Trees, 
-  CalendarRange, 
-  Leaf, 
-  ShieldAlert,
-  ChevronRight,
-  TrendingUp,
-  FileText,
-  UserCheck,
-  CheckCircle2,
-  Sparkles
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { SERVICES, CASE_STUDIES, CEO_MESSAGE, COMPANY_INFO } from "../const";
+import { SERVICES, CEO_MESSAGE, COMPANY_INFO } from "../const";
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  ShieldCheck, 
+  Award, 
+  TrendingUp, 
+  Sparkles,
+  Layers,
+  Trees,
+  ChevronRight,
+  Heart
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const [activeService, setActiveService] = useState<string>("slope");
+  const [activeTab, setActiveTab] = useState<string>("slope");
 
-  // Map icon strings to components
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case "ShieldAlert": return <ShieldAlert className="h-6 w-6 text-amber-400" />;
-      case "Trees": return <Trees className="h-6 w-6 text-amber-400" />;
-      case "CalendarRange": return <CalendarRange className="h-6 w-6 text-amber-400" />;
-      case "Leaf": return <Leaf className="h-6 w-6 text-amber-400" />;
-      default: return <Leaf className="h-6 w-6 text-amber-400" />;
+  const esgPoints = [
+    {
+      icon: <Trees className="h-5 w-5 text-emerald-400" />,
+      title: "E (Environment) - 기후변화 대응",
+      desc: "특허받은 탄소 저장형 바이오차 기반재를 전면 사용하여 시공 현장당 평균 1톤 이상의 탄소를 토양 속에 격리합니다. 또한 100% 생분해성 코코넛 섬유 매트로 미세 플라스틱 발생을 원천 차단합니다."
+    },
+    {
+      icon: <Heart className="h-5 w-5 text-emerald-400" />,
+      title: "S (Social) - 지역 상생 및 기여",
+      desc: "경기 광주 및 인근 지역의 전문 조경 기능공을 우선 채용하여 지역 일자리를 창출합니다. 매년 요양원 및 사회복지시설에 무상 기부 힐링 정원을 시공하며 도심 속 생태 복지에 앞장서고 있습니다."
+    },
+    {
+      icon: <Award className="h-5 w-5 text-emerald-400" />,
+      title: "G (Governance) - 신뢰와 상생 경영",
+      desc: "중소벤처기업부 인증 여성기업으로서 다양성과 투명한 거버넌스를 추구합니다. 창립 이래 0%의 안전사고율을 유지하며, ISO 9001/14001/45001 통합 경영 시스템을 구축하여 공정하고 안전한 준공을 보장합니다."
     }
-  };
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-grow pt-24">
-        
-        {/* SECTION 1: Cinematic Split Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center py-12">
-          {/* Subtle background mesh image */}
-          <div className="absolute inset-0 -z-20 opacity-30 mix-blend-color-dodge">
-            <img 
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/hero_bg-B6FqnpDZCvDaXrLApbTrWh.webp" 
-              alt="Luxury Abstract Background" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/80 to-transparent" />
+      <main className="flex-grow">
+        {/* SECTION 1: Cinematic Split Hero */}
+        <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+          {/* Background Ambient Glows */}
+          <div className="absolute top-1/4 left-1/4 -z-10 h-96 w-96 rounded-full bg-primary/15 blur-[120px]" />
+          <div className="absolute bottom-1/4 right-1/4 -z-10 h-96 w-96 rounded-full bg-secondary/10 blur-[120px]" />
 
-          <div className="container grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Content Column */}
+          <div className="container grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12">
+            {/* Left Column: Value Proposition */}
             <div className="lg:col-span-7 flex flex-col gap-6 text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/5 px-4 py-1.5 text-xs font-semibold tracking-wider text-amber-400 uppercase max-w-max">
-                <Sparkles className="h-4 w-4 animate-pulse text-amber-400" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5 text-xs text-emerald-300 font-semibold tracking-wide w-fit">
+                <Sparkles className="h-4 w-4 text-emerald-400" />
                 뿌리에서 미래로 — 친환경 조경의 새로운 표준
               </div>
               
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15]">
                 자연을 복원하고,<br />
-                <span className="text-gradient-gold">지속가능한 가치</span>를<br />
-                설계합니다.
+                지속가능한 가치를<br />
+                <span className="text-gradient-gold">설계합니다.</span>
               </h1>
-              
-              <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                특허 출원 중인 <strong>다층복합보강구조 시스템</strong>과 친환경 바이오차 공법으로 무너진 절·급경사 사면을 살려내며, 도심 속에 탄소를 흡수하는 고품격 조경 솔루션을 제안합니다.
+
+              <p className="text-muted-foreground text-sm sm:text-base max-w-xl leading-relaxed">
+                특허 등록된 다층복합보강구조 시스템과 친환경 바이오차 공법으로 무너진 절·급경사 사면을 살려내며, 
+                도심 속에 탄소를 흡수하는 고품격 조경 솔루션을 제안합니다.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mt-2">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href="/contact">
-                  <Button className="btn-gold w-full sm:w-auto text-sm font-semibold h-12 px-8 cursor-pointer">
+                  <Button className="btn-gold h-12 px-6 text-sm font-semibold cursor-pointer">
                     무료 현장 진단 및 상담 <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button className="btn-outline-gold w-full sm:w-auto text-sm font-semibold h-12 px-8 cursor-pointer">
+                  <Button className="btn-outline-gold h-12 px-6 text-sm font-semibold cursor-pointer">
                     사업 영역 탐색
                   </Button>
                 </Link>
               </div>
 
-              {/* Trust Badges */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border/20 mt-4">
+              {/* Quick Trust Badges */}
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border/20 max-w-lg">
                 <div className="flex flex-col">
-                  <span className="font-serif text-2xl font-bold text-gradient-gold">5년+</span>
-                  <span className="text-xs text-muted-foreground">시공 및 자문 연혁</span>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-gradient-gold">5년+</span>
+                  <span className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">시공 및 자문 연역</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-serif text-2xl font-bold text-gradient-gold">25건</span>
-                  <span className="text-xs text-muted-foreground">누적 시공 실적</span>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-gradient-gold">25건</span>
+                  <span className="text-[10px] text-emerald-400 uppercase tracking-wider mt-1">누적 시공 실적</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-serif text-2xl font-bold text-gradient-gold">3.7억</span>
-                  <span className="text-xs text-muted-foreground">시공능력평가액</span>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-gradient-gold">3.7억</span>
+                  <span className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">시공능력평가액</span>
                 </div>
               </div>
             </div>
 
-            {/* Right CEO Photo Column (Cinematic Split) */}
-            <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-full max-w-[380px] aspect-[3/4] rounded-2xl overflow-hidden border border-amber-500/20 shadow-2xl group">
-                <img 
-                  src={CEO_MESSAGE.photo} 
-                  alt="대표이사 박은선" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                {/* Overlay card */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/80 to-transparent p-6 pt-20">
-                  <span className="text-xs text-amber-400 font-semibold uppercase tracking-wider">Representative Director</span>
-                  <h3 className="font-serif text-xl font-bold text-gradient-gold mt-1">박은선 대표이사</h3>
-                  <p className="text-xs text-muted-foreground mt-2 italic leading-relaxed">
+            {/* Right Column: Premium Interactive CEO Portrait Card */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative w-full max-w-md group">
+                {/* Decorative border frame with gradient gold & emerald */}
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-emerald-500 via-amber-500 to-emerald-600 opacity-30 blur transition-all duration-500 group-hover:opacity-50" />
+                
+                <div className="relative rounded-2xl overflow-hidden border border-border bg-card p-4 flex flex-col gap-4 shadow-2xl">
+                  {/* Image container */}
+                  <div className="aspect-[3/4] w-full rounded-xl overflow-hidden relative border border-border/60">
+                    <img 
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/ceo_main-9ZpEsmvN5G1T5WzZ1eZ4gC.webp" 
+                      alt="박은선 대표이사" 
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
+                    
+                    {/* Floating Info on Image */}
+                    <div className="absolute bottom-4 left-4 right-4 text-left">
+                      <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Representative Director</span>
+                      <h3 className="font-serif text-xl font-bold text-gradient-gold mt-0.5">박은선 대표이사</h3>
+                    </div>
+                  </div>
+
+                  {/* Short Quote */}
+                  <blockquote className="text-xs text-muted-foreground italic leading-relaxed text-left border-l-2 border-emerald-500/40 pl-3 py-1">
                     &ldquo;우리가 하는 일은 단순한 공사가 아닌, 무너진 생태계를 되살리는 지속가능한 복원입니다.&rdquo;
-                  </p>
+                  </blockquote>
                 </div>
               </div>
-              
-              {/* Decorative Floating Element */}
-              <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-primary/10 blur-xl -z-10" />
-              <div className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-secondary/10 blur-2xl -z-10" />
             </div>
           </div>
         </section>
 
-        {/* SECTION 2: Dynamic Services Breakdown with Interactive Diagrams */}
+        {/* SECTION 2: ESG & Sustainability Spotlight */}
         <section className="py-24 bg-card/10 border-y border-border/20 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[150px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-emerald-500/5 blur-[120px]" />
           
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4">
-              <span className="text-xs font-bold tracking-[0.2em] text-amber-400 uppercase">Our Expertise</span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight">
-                체계적인 공법과 <span className="text-gradient-gold">혁신적 기술력</span>
+              <span className="text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase">ESG Management</span>
+              <h2 className="font-serif text-3xl font-bold tracking-tight">
+                자연과 인간의 상생을 짓는 <span className="text-gradient-gold">지속가능한 조경</span>
               </h2>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                컨설팅 마인드로 무장한 (주)이에스조경은 단순한 시공을 넘어, 각 부지 환경에 맞춤화된 공학적 분석과 지속가능한 자재 설계를 통합 제공합니다.
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                (주)이에스조경은 단순한 시공을 넘어, 기후변화 대응(E), 지역사회 상생(S), 투명하고 정직한 준공(G)을 핵심 비즈니스 모델에 통합한 선도적인 ESG 경영 실천 기업입니다.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-              {/* Left Side: Interactive Selector */}
-              <div className="lg:col-span-4 flex flex-col gap-3">
-                {SERVICES.map((service) => (
-                  <button
-                    key={service.id}
-                    onClick={() => setActiveService(service.id)}
-                    className={`flex items-start gap-4 p-5 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
-                      activeService === service.id
-                        ? "bg-primary/20 border-amber-500/40 shadow-lg shadow-amber-500/5 pl-7"
-                        : "bg-card/40 border-border/40 hover:bg-card/80 hover:border-border"
-                    }`}
-                  >
-                    <div className="mt-1 shrink-0">
-                      {getIcon(service.icon)}
-                    </div>
-                    <div>
-                      <h3 className={`font-semibold text-base transition-colors ${
-                        activeService === service.id ? "text-amber-400" : "text-foreground"
-                      }`}>
-                        {service.title}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
-                        {service.tagline}
-                      </p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-
-              {/* Right Side: Visual Detail & Interactive Diagram */}
-              <div className="lg:col-span-8">
-                {SERVICES.map((service) => {
-                  if (service.id !== activeService) return null;
-                  return (
-                    <div 
-                      key={service.id}
-                      className="luxury-card min-h-[450px] flex flex-col lg:flex-row gap-8 items-center animate-in fade-in slide-in-from-right-5 duration-500"
-                    >
-                      {/* Service Info */}
-                      <div className="flex-1 flex flex-col gap-5 text-left">
-                        <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">
-                          {service.tagline}
-                        </span>
-                        <h3 className="font-serif text-2xl font-bold">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {service.description}
-                        </p>
-                        
-                        <div className="h-px bg-border/40 my-1" />
-                        
-                        <h4 className="text-xs font-bold text-gradient-gold uppercase tracking-wider">
-                          핵심 시공 프로세스 및 특장점
-                        </h4>
-                        <ul className="flex flex-col gap-2">
-                          {service.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5 text-xs text-muted-foreground">
-                              <CheckCircle2 className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="mt-4 flex items-center justify-between bg-primary/10 border border-primary/20 rounded-lg p-4">
-                          <div className="flex flex-col">
-                            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">검증된 성과 지표</span>
-                            <span className="text-sm font-semibold text-foreground mt-0.5">{service.kpi.label}</span>
-                          </div>
-                          <span className="font-serif text-2xl font-bold text-gradient-gold">
-                            {service.kpi.value}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Service Image / Diagram */}
-                      <div className="w-full lg:w-[320px] aspect-[4/3] rounded-lg overflow-hidden border border-border/60 shrink-0">
-                        <img 
-                          src={
-                            service.id === "slope" 
-                              ? "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/slope_tech-bwFWzeXngL4eCSnuUA6Pcj.webp"
-                              : service.id === "landscape"
-                              ? "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/biochar_eco-BhEvRP5pvwFck6smCyD9Ke.webp"
-                              : "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/hero_bg-B6FqnpDZCvDaXrLApbTrWh.webp"
-                          } 
-                          alt={service.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 3: CEO Message & Company Overview */}
-        <section className="py-24">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-              {/* Left Column: CEO Philosophy */}
-              <div className="lg:col-span-5 flex flex-col gap-6 text-left">
-                <span className="text-xs font-bold tracking-[0.2em] text-amber-400 uppercase">CEO Philosophy</span>
-                <h2 className="font-serif text-3xl font-bold tracking-tight">
-                  &ldquo;흙은 거짓말을 하지 않습니다.<br />
-                  <span className="text-gradient-gold">우리도 그렇습니다.</span>&rdquo;
-                </h2>
-                <blockquote className="border-l-2 border-amber-500/40 pl-4 py-1 italic text-muted-foreground text-sm leading-relaxed">
-                  {CEO_MESSAGE.philosophy}
-                </blockquote>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  (주)이에스조경은 2020년 설립 이후 정직과 성실을 핵심 가치로 삼고 무너진 사면을 안전하게 복구하며 도심 속 녹지 공간을 아름답게 가꾸어 왔습니다. 여성 CEO의 섬세한 품질 관리와 풍부한 실무 경험을 지닌 기술이사 및 시공팀이 하나 되어 하자 없는 완벽한 시공을 약속드립니다.
-                </p>
-                <div className="flex items-center gap-4 pt-4">
-                  <div className="h-10 w-10 rounded-full overflow-hidden border border-amber-500/20">
-                    <img src={CEO_MESSAGE.photoSub} alt="박은선 대표이사 서브 사진" className="h-full w-full object-cover" />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {esgPoints.map((point, idx) => (
+                <div key={idx} className="luxury-card flex flex-col gap-4 text-left border-emerald-500/10 hover:border-emerald-500/30">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/5">
+                    {point.icon}
                   </div>
-                  <div className="flex flex-col">
-                    <span className="font-semibold text-sm text-foreground">박은선</span>
-                    <span className="text-xs text-muted-foreground">Representative Director, ES Landscape</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Company Quick Profile */}
-              <div className="lg:col-span-7 luxury-card flex flex-col gap-6 text-left">
-                <h3 className="font-serif text-xl font-bold text-gradient-gold border-b border-border/40 pb-3">
-                  회사 개요 및 핵심 역량
-                </h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
-                  <div className="flex flex-col gap-1.5">
-                    <span className="text-xs text-muted-foreground">상호명</span>
-                    <span className="font-medium">{COMPANY_INFO.name} ({COMPANY_INFO.engName})</span>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <span className="text-xs text-muted-foreground">설립일</span>
-                    <span className="font-medium">{COMPANY_INFO.founded} (업력 6년차)</span>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <span className="text-xs text-muted-foreground">대표자</span>
-                    <span className="font-medium">{COMPANY_INFO.ceo} (여성기업인증 법인)</span>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <span className="text-xs text-muted-foreground">자본금</span>
-                    <span className="font-medium">{COMPANY_INFO.capital}</span>
-                  </div>
-                </div>
-
-                <div className="h-px bg-border/40 my-1" />
-
-                <div className="flex flex-col gap-3">
-                  <h4 className="text-xs font-bold text-gradient-gold uppercase tracking-wider">
-                    등록 면허 및 보유 인증
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {COMPANY_INFO.certifications.map((cert, idx) => (
-                      <span key={idx} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card/80 px-3 py-1 text-xs text-muted-foreground">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-                        {cert}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 4: ESG & Carbon Neutral Commitment */}
-        <section className="py-24 bg-gradient-to-b from-card/10 to-primary/5 border-t border-border/20 relative">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6 relative">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-amber-500/20 shadow-2xl">
-                  <img 
-                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/biochar_eco-BhEvRP5pvwFck6smCyD9Ke.webp" 
-                    alt="Eco Sustainable Landscape with Biochar" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -right-6 bg-background/95 border border-amber-500/20 rounded-xl p-5 shadow-xl max-w-xs text-left">
-                  <span className="font-serif text-3xl font-bold text-gradient-gold">1 현장, 1 톤</span>
-                  <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                    우리가 시공하는 모든 조경 및 사면복원 현장은 평균 1톤의 CO₂를 토양 속에 격리하여 지구 온난화를 늦춥니다.
+                  <h3 className="font-serif text-lg font-bold text-gradient-gold">
+                    {point.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    {point.desc}
                   </p>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-              <div className="lg:col-span-6 flex flex-col gap-6 text-left">
-                <span className="text-xs font-bold tracking-[0.2em] text-amber-400 uppercase">ESG Management</span>
-                <h2 className="font-serif text-3xl font-bold tracking-tight">
-                  지속가능한 지구를 향한<br />
-                  <span className="text-gradient-gold">이에스조경의 ESG 실천</span>
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  단순히 예쁜 정원을 꾸미는 것을 넘어, 환경을 생각하는 소재 선택과 지역 사회 기여를 통해 환경(E), 사회(S), 지배구조(G) 전 영역에서 정직하고 투명한 기업 문화를 실천합니다.
-                </p>
+        {/* SECTION 3: Dynamic Services Showcase */}
+        <section className="py-24">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4">
+              <span className="text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase">Our Expertise</span>
+              <h2 className="font-serif text-3xl font-bold tracking-tight">
+                특허 기술이 집약된 <span className="text-gradient-gold">사업 분야</span>
+              </h2>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                급경사 사면 붕괴 위험을 방지하는 특허 공법부터 공공조달 입찰에 특화된 시공 능력까지, (주)이에스조경만의 전문화된 핵심 역량을 확인해 보세요.
+              </p>
+            </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
-                  <div className="border border-border/60 bg-card/30 rounded-xl p-4 flex flex-col gap-2">
-                    <span className="font-serif text-lg font-bold text-gradient-gold">E (Environmental)</span>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      바이오차 배합 토양 개량, 코코넛·황마 기반 생분해성 식생매트 100% 사용으로 친환경 시공 실천.
+            {/* Interactive Tabs */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              {SERVICES.map((service) => (
+                <button
+                  key={service.id}
+                  onClick={() => setActiveTab(service.id)}
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider border transition-all duration-300 cursor-pointer ${
+                    activeTab === service.id
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-black border-emerald-500 shadow-lg shadow-emerald-500/10"
+                      : "bg-card/40 border-border/40 text-muted-foreground hover:border-border hover:text-foreground"
+                  }`}
+                >
+                  {service.title}
+                </button>
+              ))}
+            </div>
+
+            {/* Active Tab Content */}
+            {SERVICES.map((service) => {
+              if (service.id !== activeTab) return null;
+              return (
+                <div 
+                  key={service.id} 
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left animate-in fade-in zoom-in-95 duration-500"
+                >
+                  {/* Left: Service Details */}
+                  <div className="lg:col-span-7 flex flex-col gap-5">
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                      {service.tagline}
+                    </span>
+                    <h3 className="font-serif text-2xl sm:text-3xl font-bold">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {service.description}
                     </p>
+                    
+                    <div className="h-px bg-border/40 my-1" />
+                    
+                    <div className="flex flex-col gap-3">
+                      <span className="text-xs font-bold text-gradient-gold uppercase tracking-widest">주요 엔지니어링 구성</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {service.features.map((feat, idx) => (
+                          <div key={idx} className="flex items-start gap-2.5 text-xs text-muted-foreground">
+                            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-4 flex items-center justify-between bg-card/40 border border-border/40 rounded-xl p-4 mt-2">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-muted-foreground uppercase tracking-wider">정량적 시공 품질 성과</span>
+                        <span className="font-medium text-xs sm:text-sm mt-0.5">{service.kpi.label}</span>
+                      </div>
+                      <span className="font-serif text-xl sm:text-2xl font-bold text-gradient-gold">
+                        {service.kpi.value}
+                      </span>
+                    </div>
                   </div>
-                  <div className="border border-border/60 bg-card/30 rounded-xl p-4 flex flex-col gap-2">
-                    <span className="font-serif text-lg font-bold text-gradient-gold">S (Social)</span>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      지역 인재 100% 채용 및 연 1회 이상 노인·아동 복지시설 조경 무상 원예치료 시공 기부.
-                    </p>
-                  </div>
-                  <div className="border border-border/60 bg-card/30 rounded-xl p-4 flex flex-col gap-2">
-                    <span className="font-serif text-lg font-bold text-gradient-gold">G (Governance)</span>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      철저한 안전보건관리계획 사전 수립 및 전 시공 과정의 디지털 투명 기록·관리.
-                    </p>
+
+                  {/* Right: Service Image */}
+                  <div className="lg:col-span-5">
+                    <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-emerald-500/10 shadow-2xl relative">
+                      <img 
+                        src={
+                          service.id === "slope" 
+                            ? "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/slope_tech-bwFWzeXngL4eCSnuUA6Pcj.webp"
+                            : service.id === "landscape"
+                            ? "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/biochar_eco-BhEvRP5pvwFck6smCyD9Ke.webp"
+                            : "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/hero_bg-B6FqnpDZCvDaXrLApbTrWh.webp"
+                        } 
+                        alt={service.title} 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+                    </div>
                   </div>
                 </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* SECTION 4: Technical Advantage (Patent 5-Layer Slope Tech Highlight) */}
+        <section className="py-24 bg-card/10 border-y border-border/20 relative">
+          <div className="container grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left: Image representing technical slope stabilization */}
+            <div className="lg:col-span-5">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-emerald-500/10 shadow-2xl relative">
+                <img 
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/slope_tech-bwFWzeXngL4eCSnuUA6Pcj.webp" 
+                  alt="다층복합보강구조 사면" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-background/10 to-transparent" />
+              </div>
+            </div>
+
+            {/* Right: Technical Explanation */}
+            <div className="lg:col-span-7 text-left flex flex-col gap-5">
+              <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="h-4 w-4" /> 특허 등록 독자 공법
+              </span>
+              <h3 className="font-serif text-3xl font-bold tracking-tight">
+                산사태 예방을 위한<br />
+                <span className="text-gradient-gold">다층복합보강구조 사면복원 기술</span>
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                집중호우로 인한 급경사 사면 붕괴를 원천 차단하기 위해 식생매트, 바이오차 식생기반재, HDPE 지오그리드, 이중와셔 앵커핀, 배수 유공관을 유기적으로 결합한 5레이어 독자적 보강 공법입니다. 토사 유실 방지율 98.5%를 자랑합니다.
+              </p>
+              
+              <div className="flex flex-col gap-3 pt-2">
+                <div className="flex items-start gap-2.5 text-xs text-muted-foreground">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong>토사 유실 원천 차단</strong>: 생분해 코코넛 매트와 앵커핀의 견고한 안착</span>
+                </div>
+                <div className="flex items-start gap-2.5 text-xs text-muted-foreground">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong>탄소 격리형 기반재</strong>: 바이오차 혼합토를 활용한 수목의 신속한 활착 유도</span>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <Link href="/services">
+                  <Button className="btn-outline-gold h-11 px-5 text-xs font-semibold cursor-pointer">
+                    5-Layer 상세 원리 알아보기 <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 5: Final CTA (Enterprise Lead Attraction) */}
-        <section className="py-20 relative overflow-hidden border-t border-border/20">
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/10 to-secondary/5" />
-          <div className="container text-center max-w-4xl mx-auto flex flex-col gap-6 items-center">
+        {/* SECTION 5: Call to Action (Enterprise Lead Generation) */}
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+          <div className="container max-w-4xl mx-auto text-center flex flex-col gap-6 items-center">
+            <span className="text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase">Request Free Diagnosis</span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight">
-              사면 붕괴 위험 진단 및 <span className="text-gradient-gold">맞춤형 견적 제안</span>
+              전문 시공 기술팀의<br />
+              <span className="text-gradient-gold">무상 현장 정밀 진단 서비스</span>
             </h2>
-            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl leading-relaxed">
-              광주, 하남, 성남, 이천 등 경기도 전 권역을 포함한 전국 현장에 대해 24시간 내 신속한 현장 답사와 맞춤형 친환경 설계 진단을 제공해 드립니다.
+            <p className="text-muted-foreground text-sm max-w-2xl leading-relaxed">
+              사면 붕괴 우려가 있거나 조경 설계 및 정기 관리가 필요한 경기도 전역 및 전국의 현장에 대해, 
+              이에스조경의 기술진이 직접 방문하여 공법 제안과 합리적인 견적을 무료로 산출해 드립니다.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
+            <div className="pt-4">
               <Link href="/contact">
                 <Button className="btn-gold h-12 px-8 text-sm font-semibold cursor-pointer">
-                  1:1 정밀 진단 신청하기 <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/portfolio">
-                <Button className="btn-outline-gold h-12 px-8 text-sm font-semibold cursor-pointer">
-                  전체 시공 사례 탐색
+                  1:1 무상 진단 신청하기 <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
             </div>
           </div>
         </section>
-
       </main>
 
       <Footer />

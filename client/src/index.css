@@ -1,7 +1,7 @@
 /*
- * Design Philosophy: Liquid Carbon & Gold
- * Luxury Dark Mode & Generative Fluid Art
- * Dominant Deep Purple, Brilliant Champagne Gold, and Sleek Graphite Dark.
+ * Design Philosophy: Forest Emerald & Champagne Gold (이에스조경 ESG 리뉴얼)
+ * Combining Brand Colors (Construction Green, Fresh Leaf, Deep Navy) with Premium Champagne Gold.
+ * Creating a rich, organic, and prestigious eco-friendly aesthetic.
  */
 
 @import "tailwindcss";
@@ -49,46 +49,47 @@
 }
 
 :root {
-  /* Graphite Dark Background with Purple-Blue undertones */
-  --background: oklch(0.12 0.02 260);
-  --foreground: oklch(0.95 0.01 260);
+  /* Rich Forest Dark Background (with deep emerald green and navy undertones) */
+  --background: oklch(0.15 0.04 160); /* Deep Forest Green Dark */
+  --foreground: oklch(0.96 0.01 160);
   
-  /* Deep Purple Primary and Champagne Gold Accents */
-  --primary: oklch(0.45 0.22 285); /* Deep Purple */
-  --primary-foreground: oklch(0.98 0.01 260);
+  /* Brand Green (Construction Green / Emerald) */
+  --primary: oklch(0.48 0.16 150); /* Vivid Emerald Green */
+  --primary-foreground: oklch(0.98 0.01 160);
   
-  /* Secondary: Soft Gold Metallic */
-  --secondary: oklch(0.78 0.12 85); /* Champagne Gold */
-  --secondary-foreground: oklch(0.12 0.02 260);
+  /* Champagne Gold (from brand assets) */
+  --secondary: oklch(0.82 0.11 85); /* Radiant Champagne Gold */
+  --secondary-foreground: oklch(0.12 0.02 160);
   
-  /* Cards & Surfaces with translucent glassmorphic look */
-  --card: oklch(0.15 0.02 260 / 85%);
-  --card-foreground: oklch(0.95 0.01 260);
+  /* Cards & Surfaces with rich translucent forest glassmorphic look */
+  --card: oklch(0.18 0.03 160 / 90%);
+  --card-foreground: oklch(0.96 0.01 160);
   
-  --popover: oklch(0.15 0.02 260);
-  --popover-foreground: oklch(0.95 0.01 260);
+  --popover: oklch(0.18 0.03 160);
+  --popover-foreground: oklch(0.96 0.01 160);
   
-  --muted: oklch(0.22 0.02 260);
-  --muted-foreground: oklch(0.70 0.01 260);
+  --muted: oklch(0.24 0.02 160);
+  --muted-foreground: oklch(0.72 0.02 160);
   
-  --accent: oklch(0.25 0.08 285);
-  --accent-foreground: oklch(0.90 0.08 85); /* Gold text on Purple accent */
+  /* Accent: Brand Fresh Leaf (싱그러운 연두색) */
+  --accent: oklch(0.68 0.18 135); /* Fresh Leaf Green */
+  --accent-foreground: oklch(0.15 0.04 160);
   
   --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0.01 260);
+  --destructive-foreground: oklch(0.98 0.01 160);
   
-  /* Border & Input: Thin elegant lines */
-  --border: oklch(0.25 0.02 260 / 40%);
-  --input: oklch(0.22 0.02 260 / 60%);
-  --ring: oklch(0.78 0.12 85); /* Gold ring */
+  /* Border & Input: Thin elegant lines with soft green glow */
+  --border: oklch(0.28 0.04 150 / 50%);
+  --input: oklch(0.24 0.03 150 / 70%);
+  --ring: oklch(0.82 0.11 85); /* Gold ring */
   
   --radius: 0.75rem;
 }
 
-/* Force Dark Theme as default for Liquid Carbon & Gold theme */
+/* Force Dark Theme as default to preserve high-end visual contrast */
 .dark {
-  --background: oklch(0.12 0.02 260);
-  --foreground: oklch(0.95 0.01 260);
+  --background: oklch(0.15 0.04 160);
+  --foreground: oklch(0.96 0.01 160);
 }
 
 @layer base {
@@ -97,9 +98,11 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased selection:bg-secondary/30 selection:text-secondary;
+    /* Soft ambient lighting representing sunrays filtering through a deep forest */
     background-image: 
-      radial-gradient(at 0% 0%, oklch(0.18 0.10 285 / 15%) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, oklch(0.78 0.12 85 / 5%) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, oklch(0.55 0.18 140 / 12%) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, oklch(0.82 0.11 85 / 8%) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, oklch(0.20 0.05 200 / 10%) 0px, transparent 70%);
     background-attachment: fixed;
   }
   
@@ -138,35 +141,35 @@
     }
   }
 
-  /* Luxury Card Hover effect */
+  /* Luxury Card Hover effect with organic Forest Green shadow and Gold border */
   .luxury-card {
     @apply relative overflow-hidden rounded-xl border border-border bg-card p-6 text-card-foreground backdrop-blur-md transition-all duration-500;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   }
   
   .luxury-card::before {
     content: '';
-    @apply absolute inset-0 -z-10 bg-gradient-to-br from-primary/10 to-secondary/5 opacity-0 transition-opacity duration-500;
+    @apply absolute inset-0 -z-10 bg-gradient-to-br from-primary/15 to-secondary/5 opacity-0 transition-opacity duration-500;
   }
   
   .luxury-card:hover {
-    @apply -translate-y-1 border-secondary/30;
+    @apply -translate-y-1 border-secondary/40;
     box-shadow: 
-      0 10px 40px rgba(0, 0, 0, 0.4),
-      0 0 20px rgba(217, 119, 6, 0.05);
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      0 0 25px rgba(110, 231, 183, 0.06);
   }
   
   .luxury-card:hover::before {
     @apply opacity-100;
   }
 
-  /* Premium Gradient Text */
+  /* Premium Gradient Text - Rich Forest Gold & Fresh Green */
   .text-gradient-gold {
     @apply bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent;
   }
   
-  .text-gradient-purple {
-    @apply bg-gradient-to-r from-violet-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent;
+  .text-gradient-green {
+    @apply bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent;
   }
   
   /* Gold Premium Button */
