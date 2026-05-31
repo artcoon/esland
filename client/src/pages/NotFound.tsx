@@ -1,49 +1,40 @@
+/*
+ * Design Philosophy: Liquid Carbon & Gold
+ * Page: 404 Not Found (Luxury Theme)
+ */
+
+import { Link } from "wouter";
+import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
-import { useLocation } from "wouter";
 
 export default function NotFound() {
-  const [, setLocation] = useLocation();
-
-  const handleGoHome = () => {
-    setLocation("/");
-  };
-
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
-            </div>
-          </div>
-
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
-
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
-          </h2>
-
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-6 relative overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
+      
+      <div className="text-center max-w-md flex flex-col items-center gap-6 animate-in zoom-in-95 duration-500">
+        <div className="h-16 w-16 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+          <AlertTriangle className="h-8 w-8 text-amber-400" />
+        </div>
+        
+        <div className="flex flex-col gap-2">
+          <span className="font-serif text-6xl font-black text-gradient-gold">404</span>
+          <h1 className="font-serif text-2xl font-bold tracking-tight mt-2">
+            페이지를 찾을 수 없습니다
+          </h1>
+          <p className="text-sm text-muted-foreground leading-relaxed mt-1">
+            요청하신 주소가 올바르지 않거나 변경되어 찾을 수 없습니다. 
+            이에스조경의 프리미엄 조경 컨설팅 메인 홈으로 돌아가 보세요.
           </p>
+        </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              <Home className="w-4 h-4 mr-2" />
-              Go Home
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        <Link href="/">
+          <Button className="btn-gold px-6 py-2.5 text-xs font-semibold cursor-pointer">
+            <ArrowLeft className="h-4 w-4" /> 메인 홈으로 돌아가기
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
