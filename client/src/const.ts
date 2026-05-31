@@ -1,5 +1,5 @@
 // Stratify Consulting - Premium Data Constants
-// Design Theme: Liquid Carbon & Gold
+// Design Theme: Forest Emerald & Champagne Gold
 // Integrating actual data from ES Landscape's comprehensive business report.
 
 export interface CaseStudy {
@@ -191,8 +191,8 @@ export const INSIGHTS = [
 export const CEO_MESSAGE = {
   name: "박은선",
   title: "대표이사",
-  photo: "/manus-storage/ceo_4_6c0cf603.jpg", // CEO 4 (Full portrait)
-  photoSub: "/manus-storage/ceo_5_c7bc0efd.jpg", // CEO 5 (Alternative portrait)
+  photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/ceo_main-9ZpEsmvN5G1T5WzZ1eZ4gC.webp", // Uploaded CEO photo
+  photoSub: "https://d2xsxph8kpxj0f.cloudfront.net/310519663283438125/4Ty34aTXnHdjiTU7VWcZUo/ceo_sub-5T7bXoEfdC7bc0efdC7bc0.webp", // Uploaded alternative CEO photo
   philosophy: "“뿌리가 깊은 나무는 흔들리지 않는다.” — 정직한 시공, 지속가능한 약속, 사람을 향한 조경",
   quote: "우리가 하는 일은 단순한 '공사'가 아니라, 상처받은 자연과 도심을 되살리는 '생태 복원'입니다.",
   paragraphs: [
