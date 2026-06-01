@@ -27,8 +27,8 @@ export const COMPANY_INFO = {
 export const CEO_MESSAGE = {
   name: "박은선",
   title: "대표이사",
-  photo: "/manus-storage/ceo_desk_cbc19a03.png", // User provided high-quality desk portrait
-  photoSub: "/manus-storage/ceo_desk_cbc19a03.png", // added photoSub for compatibility with Home.tsx
+  photo: "/manus-storage/ceo_photo_5_1aa8eacf.jpg", // Newly uploaded high-quality portrait
+  photoSub: "/manus-storage/ceo_photo_5_1aa8eacf.jpg", // added photoSub for compatibility with Home.tsx
   philosophy: "현장에 정직하게 뿌리내린 녹색 기술만이 지속가능한 내일을 보장합니다.", // added philosophy for compatibility with Home.tsx
   greeting: "안녕하십니까, (주)이에스조경 대표이사 박은선입니다.",
   paragraphs: [

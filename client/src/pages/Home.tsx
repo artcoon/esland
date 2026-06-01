@@ -319,13 +319,10 @@ export default function Home() {
 
             {/* CEO Message Detail Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-24">
-              {/* CEO Images */}
-              <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-                <div className="rounded-2xl overflow-hidden border border-border shadow-md aspect-[3/4]">
-                  <img src={CEO_MESSAGE.photo} alt="박은선 대표이사 메인" className="w-full h-full object-cover" />
-                </div>
-                <div className="rounded-2xl overflow-hidden border border-border shadow-md aspect-[3/4] mt-8">
-                  <img src={CEO_MESSAGE.photoSub} alt="박은선 대표이사 서브" className="w-full h-full object-cover" />
+              {/* CEO Image (Single elegant portrait) */}
+              <div className="lg:col-span-5">
+                <div className="rounded-2xl overflow-hidden border border-border shadow-xl aspect-[3/4] max-w-[400px] mx-auto">
+                  <img src={CEO_MESSAGE.photo} alt="박은선 대표이사" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                 </div>
               </div>
 
