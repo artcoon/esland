@@ -28,7 +28,7 @@ export const CEO_MESSAGE = {
   name: "박은선",
   title: "대표이사",
   photo: "/manus-storage/ceo_photo_5_1aa8eacf.jpg",
-  /** Hero section portrait (same asset as `photo`) */
+  /** Hero section portrait */
   photoHero: "/manus-storage/ceo_photo_5_1aa8eacf.jpg",
   photoSub: "/manus-storage/ceo_photo_5_1aa8eacf.jpg",
   philosophy: "현장에 정직하게 뿌리내린 녹색 기술만이 지속가능한 내일을 보장합니다.", // added philosophy for compatibility with Home.tsx
