@@ -16,7 +16,14 @@ export default function Navbar() {
       }
 
       // Track active section on scroll
-      const sections = ["home", "about", "services", "portfolio", "insights", "contact"];
+      const sections = [
+        "home",
+        "about",
+        "services",
+        "portfolio",
+        "insights",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 120; // offset for navbar height
 
       for (const section of sections) {
@@ -82,7 +89,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => {
+          {navItems.map(item => {
             const isActive = activeSection === item.id;
             return (
               <button
@@ -135,14 +142,16 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border/80 backdrop-blur-xl animate-in fade-in slide-in-from-top-5 duration-300 shadow-lg">
           <div className="container py-6 flex flex-col gap-4 text-left">
-            {navItems.map((item) => {
+            {navItems.map(item => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`block text-base font-bold py-2 transition-colors cursor-pointer text-left bg-transparent border-0 w-full ${
-                    isActive ? "text-primary" : "text-muted-foreground hover:text-primary"
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary"
                   }`}
                 >
                   {item.name}
