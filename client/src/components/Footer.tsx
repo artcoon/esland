@@ -29,7 +29,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="(주)이에스조경"
-                className="h-8 w-8 object-contain shrink-0"
+                className="h-10 w-auto max-h-12 sm:h-12 sm:max-h-14 object-contain shrink-0"
               />
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed font-semibold max-w-sm">

@@ -69,7 +69,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="(주)이에스조경"
-            className="h-10 w-10 object-contain shrink-0"
+            className="h-12 w-auto max-h-14 sm:h-14 sm:max-h-16 object-contain shrink-0"
           />
         </button>
 
