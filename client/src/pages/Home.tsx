@@ -183,10 +183,10 @@ export default function Home() {
     try {
       const payload = {
         access_key: "7822e4f8-931b-44cc-806f-122c50aaf61d",
-        subject: `[무료 진단/문의] ${formData.companyName} (${formData.contactPerson})`,
-        from_name: formData.companyName,
-        name: formData.contactPerson,
-        email: formData.email,
+        subject: `새로운 고객 문의: ${formData.companyName}`,
+        "회사/기관명": formData.companyName,
+        "담당자명": formData.contactPerson,
+        "회신받을 이메일": formData.email,
         "연락처": formData.phone,
         "요청 공사 구분": formData.projectType || "-",
         "사면 경사도": formData.slopeAngle || "-",
