@@ -182,19 +182,19 @@ export default function Home() {
 
     try {
       const payload = {
-        _subject: `[무료 진단/문의] ${formData.companyName} (${formData.contactPerson})`,
-        _captcha: "false",
-        "회사/기관명": formData.companyName,
-        "담당자명": formData.contactPerson,
+        access_key: "7822e4f8-931b-44cc-806f-122c50aaf61d",
+        subject: `[무료 진단/문의] ${formData.companyName} (${formData.contactPerson})`,
+        from_name: formData.companyName,
+        name: formData.contactPerson,
+        email: formData.email,
         "연락처": formData.phone,
-        "이메일": formData.email,
         "요청 공사 구분": formData.projectType || "-",
         "사면 경사도": formData.slopeAngle || "-",
         "예산 규모": formData.budget || "-",
         "상세 내용": formData.details,
       };
 
-      const response = await fetch(`https://formsubmit.co/ajax/${COMPANY_INFO.email}`, {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -203,15 +203,9 @@ export default function Home() {
         body: JSON.stringify(payload),
       });
 
-      let result;
-      const textResponse = await response.text();
-      try {
-        result = JSON.parse(textResponse);
-      } catch (e) {
-        throw new Error("서버에서 올바르지 않은 응답이 왔습니다: " + textResponse.substring(0, 50));
-      }
+      const result = await response.json();
 
-      if (!response.ok || (result.success !== "true" && result.success !== true)) {
+      if (!response.ok || !result.success) {
         throw new Error(result.message || "알 수 없는 에러가 발생했습니다.");
       }
 
