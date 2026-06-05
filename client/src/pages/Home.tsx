@@ -179,12 +179,8 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      const accessKey = "7822e4f8-931b-44cc-806f-122c50aaf61d";
-
       const payload = {
-        access_key: accessKey,
-        subject: `[무료 진단/문의] ${formData.companyName} (${formData.contactPerson})`,
-        from_name: formData.companyName,
+        _subject: `[무료 진단/문의] ${formData.companyName} (${formData.contactPerson})`,
         "회사/기관명": formData.companyName,
         "담당자명": formData.contactPerson,
         "연락처": formData.phone,
@@ -195,7 +191,7 @@ export default function Home() {
         "상세 내용": formData.details,
       };
 
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(`https://formsubmit.co/ajax/${COMPANY_INFO.email}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -206,7 +202,7 @@ export default function Home() {
 
       const result = await response.json();
 
-      if (!response.ok || !result.success) {
+      if (!response.ok || (result.success !== "true" && result.success !== true)) {
         throw new Error(result.message || "서버 에러가 발생했습니다.");
       }
 
