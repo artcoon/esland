@@ -183,6 +183,7 @@ export default function Home() {
     try {
       const payload = {
         _subject: `[무료 진단/문의] ${formData.companyName} (${formData.contactPerson})`,
+        _captcha: "false",
         "회사/기관명": formData.companyName,
         "담당자명": formData.contactPerson,
         "연락처": formData.phone,
@@ -202,10 +203,16 @@ export default function Home() {
         body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
+      let result;
+      const textResponse = await response.text();
+      try {
+        result = JSON.parse(textResponse);
+      } catch (e) {
+        throw new Error("서버에서 올바르지 않은 응답이 왔습니다: " + textResponse.substring(0, 50));
+      }
 
       if (!response.ok || (result.success !== "true" && result.success !== true)) {
-        throw new Error(result.message || "서버 에러가 발생했습니다.");
+        throw new Error(result.message || "알 수 없는 에러가 발생했습니다.");
       }
 
       toast.success("무료 진단 요청이 성공적으로 접수되었습니다. 빠르게 확인 후 연락드리겠습니다.");
@@ -222,7 +229,8 @@ export default function Home() {
         details: "",
       });
     } catch (error) {
-      toast.error("전송에 실패했습니다. 다시 시도해 주세요.");
+      console.error(error);
+      toast.error(`전송 실패: ${error instanceof Error ? error.message : "네트워크 에러"}`);
     } finally {
       setIsSubmitting(false);
     }
